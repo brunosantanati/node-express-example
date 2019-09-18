@@ -56,14 +56,14 @@ app.get('/weather', (req, res) => {
 })
 
 app.get('/help/*', (req, res) => {
-    res.render('error404', {
+    res.render('404page', {
         errorMessage: 'Help article not found',
         name: siteCreatorName
     })
 })
 
 app.get('*', (req, res) => {
-    res.render('error404', {
+    res.render('404page', {
         errorMessage:'404 Page Not Found',
         name: siteCreatorName
     })
