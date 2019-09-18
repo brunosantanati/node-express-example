@@ -9,6 +9,8 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
 
+let siteCreatorName = "Bruno Sant' Ana"
+
 // Setup handlebars engine and views location
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
@@ -21,21 +23,21 @@ app.get('/help', (req, res) => {
     res.render('help', { 
         helpText: 'This is the help page',
         title: 'Help',
-        name: 'Bruno'
+        name: siteCreatorName
     })
 })
 
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About me',
-        name: 'Bruno'
+        name: siteCreatorName
     })
 })
 
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather app',
-        name: 'Bruno'
+        name: siteCreatorName
     })
 })
 
@@ -54,11 +56,17 @@ app.get('/weather', (req, res) => {
 })
 
 app.get('/help/*', (req, res) => {
-    res.send('Help article not found')
+    res.render('error404', {
+        errorMessage: 'Help article not found',
+        name: siteCreatorName
+    })
 })
 
 app.get('*', (req, res) => {
-    res.send('My 404 page')
+    res.render('error404', {
+        errorMessage:'404 Page Not Found',
+        name: siteCreatorName
+    })
 })
 
 app.listen(3000, () => {
