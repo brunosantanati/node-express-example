@@ -42,17 +42,37 @@ app.get('', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
+
+    if(!req.query.address){
+        return res.send({
+            error: 'You must provide an address.'
+        })
+    }
+
     res.send([
         {
-            temperature: 15,
-            centigrade_scale: 'celsius',
-            city: 'SP'
-        }, {
-            temperature: 30,
-            centigrade_scale: 'celsius',
-            city: 'AL'
+            forecast: 'It is snowing',
+            location: 'Philadelphia',
+            address: req.query.address
         }
     ])
+})
+
+app.get('/products', (req, res) => {
+
+    //test this code with url http://localhost:3000/products?search=teste
+    if(!req.query.search){
+        return res.send({
+            error: 'You must provide a search term.'
+        })
+    }
+
+    console.log(req.query)
+    console.log(req.query.search)
+
+    res.send({
+        products: []
+    })
 })
 
 app.get('/help/*', (req, res) => {
